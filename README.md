@@ -5,3 +5,10 @@ Représenter graphiquement le nombre d'itérations nécessaire à chaque méthod
 python
 ## Interface de programmation 
 Spyder
+## Bibliothèques utilisées 
+#### Matplotlib
+Pour illustrer graphiquement les fonctions 
+#### Numpy 
+Pour générer et manipuler les vecteurs et les fonctions mathématiques
+## Hypothèses utilisées 
+### Méthode de dichotomie 
