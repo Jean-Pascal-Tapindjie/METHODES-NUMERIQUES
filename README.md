@@ -26,7 +26,7 @@ c'est une variante de la méthode de newton ne nécessitant pas la connaissance 
 ## Fonctions utilisées 
 Pour ce projet, j'ai utilisé 04 fonctions donc certaines ont été proposées dans l'exercice de groupe. Parmi ces fonctions, nous avons f1(x) = 3cos(x) - 2log(x+1) -1 avec x > -1; f2(x) = 9x - 3/2; f3(x) = (5x - 2)^3; f4(x) = (2x - 1)^5  pour tout x dans R, et toutes ces fonctions vérifient toutes les hypothèses énumérées ci-dessus avec pour dérivées respectives df1(x) = -3sin(x) - 2/(1+x); df2(x) = 9; df3(x) = 15(5x-2)^2; df4(x) = 10(2x-1)^4
 ### Illustration graphique
-<img width="2710" height="1680" alt="Figure 2026-10-30 175124 (0)" src="https://github.com/user-attachments/assets/2c376113-c9b6-423e-8f62-b6bd26cba390" />
+<img width="1710" height="680" alt="Figure 2026-10-31 230925 (0)" src="https://github.com/user-attachments/assets/bc250c73-d62c-47a3-ac83-f6b0307a66e9" />
 
 ## Méthodes numériques
 
