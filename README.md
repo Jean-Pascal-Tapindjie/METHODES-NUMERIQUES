@@ -17,9 +17,9 @@ Pour générer et manipuler les vecteurs et les fonctions mathématiques
 Tout au long du projet, les fonctions utilisées respectent toutes les hypothèses citées ci-dessous. 
 Considérons f la fonction utilisée.
 ### Méthode de dichotomie
-f est continue sur un intervalle [a,b] de R et f(a)*f(b) < 0 donc par le théorème des valeurs intermédiaires, il existe x0 dans [a,b] tel que f(x0) = 0
+f est continue sur un intervalle [a,b] de R et f(a) * f(b) < 0 donc par le théorème des valeurs intermédiaires, il existe x* dans [a,b] tel que f(x*) = 0
 ### Méthode de newton
-f est dérivable sur un intervalle [a,b] de R et la dérivée ne s'annule pas sur cet intervalle, c'est-à-dire que f est monotone sur cet intervalle. Aussi il existe un x0 dans [a,b] tel que f(x0) = 0
+f est dérivable sur un intervalle [a,b] de R et la dérivée ne s'annule pas sur cet intervalle, c'est-à-dire que f est monotone sur cet intervalle. Aussi il existe un x* dans [a,b] tel que f(x*) = 0
 ### Méthode de la sécante
 c'est une variante de la méthode de newton ne nécessitant pas la connaissance de la dérivée. Donc f est continue sur [a,b] et (f(b) - f(a)) différent de zéro.
 
@@ -29,4 +29,9 @@ Pour ce projet, j'ai utilisé 04 fonctions donc certaines ont été proposées d
 <img width="1710" height="880" alt="Figure 2026-10-31 230925 (0)" src="https://github.com/user-attachments/assets/bc250c73-d62c-47a3-ac83-f6b0307a66e9" />
 
 ## Méthodes numériques
+### Méthode de dichotomie
+#### Principe
+soit f une fonction vérifiant les hypothèses ci-dessus. la méthode de dichotomie consiste à diviser l'intervalle [a,b] en deux sous-intervalles de longueur égale et on sélectionne parmi eux celui où se trouve de manière certaine une racine de f, puis on répète de manière itérative cet opération jusqu'à obtenir un intervalle jugé suffisamment petit.  
+#### dichoto()
+
 
