@@ -33,5 +33,9 @@ Pour ce projet, j'ai utilisé 04 fonctions donc certaines ont été proposées d
 #### Principe
 soit f une fonction vérifiant les hypothèses ci-dessus. la méthode de dichotomie consiste à diviser l'intervalle [a,b] en deux sous-intervalles de longueur égale et on sélectionne parmi eux celui où se trouve de manière certaine une racine de f, puis on répète de manière itérative cet opération jusqu'à obtenir un intervalle jugé suffisamment petit.  
 #### dichoto()
+la fonction dichoto() prend en argument une fonction f, deux réels a, b, un entier k pour la précision et un nombre d'itérations maximum ici fixé à 10000. Elle renvoie des erreurs si les conditions a < b ou f(a) * f(b) < 0 ne sont pas vérifiées ou si la méthode ne converge pas après 10000 itérations et dans le cas contraire, renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que |f(x*)| < 10^(-k); et d'un entier i représentant le nombre d'itération nécessaire pour atteindre cette précision (10^(-k)).
 
+### Méthode de newton
+#### Principe
+soit f une fonction vérifiant les hypothèses ci-dessus. 
 
