@@ -17,11 +17,11 @@ Pour générer et manipuler les vecteurs et les fonctions mathématiques
 Tout au long du projet, les fonctions utilisées respectent toutes les hypothèses citées ci-dessous. 
 Considérons f la fonction utilisée.
 ### Méthode de dichotomie
-f est continue sur un intervalle [a,b] de R et f(a) * f(b) < 0 donc par le théorème des valeurs intermédiaires, il existe x* dans [a,b] tel que f(x*) = 0
+f est continue sur un intervalle [a,b] de R et **f(a) * f(b) < 0** donc par le théorème des valeurs intermédiaires, il existe x* dans [a,b] tel que f(x*) = 0
 ### Méthode de newton
 f est dérivable sur un intervalle [a,b] de R et la dérivée ne s'annule pas sur cet intervalle, c'est-à-dire que f est monotone sur cet intervalle. Aussi il existe un x* dans [a,b] tel que f(x*) = 0
 ### Méthode de la sécante
-c'est une variante de la méthode de newton ne nécessitant pas la connaissance de la dérivée. Donc f est continue sur [a,b] et (f(b) - f(a)) différent de zéro.
+c'est une variante de la méthode de newton ne nécessitant pas la connaissance de la dérivée. Donc f est continue sur [a,b] et **(f(b) - f(a))** différent de zéro.
 
 ## Fonctions utilisées 
 Pour ce projet, j'ai utilisé 04 fonctions donc certaines ont été proposées dans l'exercice de groupe. Parmi ces fonctions, nous avons f1(x) = 3cos(x) - 2log(x+1) -1 avec x > -1; f2(x) = 9x - 3/2; f3(x) = (5x - 2)^3; f4(x) = (2x - 1)^5  pour tout x dans R, et toutes ces fonctions vérifient toutes les hypothèses énumérées ci-dessus avec pour dérivées respectives df1(x) = -3sin(x) - 2/(1+x); df2(x) = 9; df3(x) = 15(5x-2)^2; df4(x) = 10(2x-1)^4
@@ -37,7 +37,7 @@ la fonction dichoto() prend en argument une fonction f vérifiant les hypothèse
 
 ### Méthode de newton
 #### Principe
-soit f une fonction vérifiant les hypothèses ci-dessus. Partant d’un point initial x(0) connu dans un voisinage suffisamment petit de la racine x* de la fonction f, on construit itérativement une suite de points x(k) qui convergera vers le point x* recherché. On approche à chaque itération k la courbe de la fonction par sa tangente en x(k). Le point x(k+1) est alors l’intersection de la tangente au point x(k) avec l’axe des abscisses. on a donc **x(k+1) = x(k) - f(x(k))/df(x(k))** pour tout k >= 0 et c'est bien définie sur [a,b]  car df ne s'annule pas par hypothèse. 
+soit f une fonction vérifiant les hypothèses ci-dessus. Partant d’un point initial x(0) connu dans un voisinage suffisamment petit de la racine x* de la fonction f, on construit itérativement une suite de points x(k) qui convergera vers le point x* recherché. On approche à chaque itération k la courbe de la fonction par sa tangente en x(k). Le point x(k+1) est alors l’intersection de la tangente au point x(k) avec l’axe des abscisses. on a donc **x(k+1) = x(k) - f(x(k)) / df(x(k))** pour tout k >= 0 et c'est bien définie sur [a,b]  car df ne s'annule pas par hypothèse. 
 #### newton(f, df, b:float, k:int, nbetap = 10000)
 Elle prend en argument une fonction f vérifiant les hypothèses ci-dessus avec sa dérivée df, un réel b qui représente x(0), un entier k pour la précision et le nombre d'itérations maximales fixé à 10000. Elle renvoie une erreur si pour tout x, df(x) = 0 ou si la méthode ne converge pas après 10000 et dans le cas contraire renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaire pour atteindre cette précision (10^(-k)).
 
@@ -45,8 +45,36 @@ Elle prend en argument une fonction f vérifiant les hypothèses ci-dessus avec 
 #### Principe 
 soit f une fonction vérifiant les hypothèses ci-dessus. La méthode de la sécante est une variante géométrique de la méthode de newton et ne nécessite pas de calcul de la dérivée. Elle utilise les deux derniers points calculés pour déterminer le point suivant. À l’itération k, la droite sécante passe par les points **M(k−1) = (x(k−1),f(x(k−1))) et M(k) = (x(k),f(x(k)))**. Le nouveau point x(k+1) est l’intersection de cette droite avec l’axe des abscisses. on a donc **x(k + 1) = x(k) - f(x(k)) * ((x(k) - x(k-1)) / (f(x(k))-f(x(k-1))))** pour tout k >= 1 et x(0) et x(1) connus. 
 #### secante(f, a:float, b:float, k:int, nbetap = 10000)
-Elle prend en argument une fonction f vérifiant les hypothèses ci-dessus, deux réels a, b tels que a = x(0) et b = x(1), un entier k pour la ^précision et un nombre d'itérations maximales fixé à 10000. Elle renvoie une erreur si f(a) - f(b) = 0 ou si la méthode ne converge pas après 10000 itérations. Sinon elle renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaire pour atteindre cette précision (10^(-k)).
+Elle prend en argument une fonction f vérifiant les hypothèses ci-dessus, deux réels a, b tels que a = x(0) et b = x(1), un entier k pour la ^précision et un nombre d'itérations maximales fixé à 10000. Elle renvoie une erreur si **f(a) - f(b) = 0** ou si la méthode ne converge pas après 10000 itérations. Sinon elle renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaire pour atteindre cette précision (10^(-k)).
 
 ## Principe de comparaison 
+Toutes les fonctions dichoto(), newton() ou secante(), ont comme argument une précision k et retournent une approximation de la racine de la fonction tel que **|f(x * )| < 10^(-k)** et le nombre d'itérations nécessaires pour atteindre cet précision. Ici, pour chacune des quatre fonctions f1, f2, f3 et f4 citées ci-dessus, nous allons tracer des graphes représentant le nombre d'itérations nécessaire pour atteindre la précision de 10^(-k) en fonction de k avec k = {1,2,3,4,5,6}
+### Données 
+J'ai exécuté les fonctions dichoto(), newton() ou secante() avec chacune des quatre fonctions f1, f2, f3 et f4 citées ci-dessus et avec la précision k allant de 1 à 6. j'ai récupéré le nombre d'itérations pour chaque méthode et avant de présenter le graphe je vais présenter ces données numériques sous formes de tableau
+#### Méthode de dichotomie 
+| Fonction | k = 1 | k = 2 | k = 3 | k = 4 | k = 5 | k = 6 |                 
+|:--------:|------:|------:|------:|------:|------:|------:|
+| f1       | 1     | 1     | 10    | 10    | 14    | 19    |
+| f2       | 3     | 7     | 11    | 14    | 16    | 21    |
+| f3       | 1     | 2     | 3     | 5     | 6     | 7     |
+| f4       | 0     | 0     | 0     | 0     | 3     | 3     |
+#### Méthode de newton
+| Fonction | k = 1 | k = 2 | k = 3 | k = 4 | k = 5 | k = 6 |
+|:--------:|------:|------:|------:|------:|------:|------:|
+| f1       | 1     | 2     | 2     | 2     | 3     | 3     |
+| f2       | 1     | 1     | 1     | 1     | 1     | 1     |
+| f3       | 5     | 7     | 9     | 11    | 13    | 15    |
+| f4       | 3     | 5     | 7     | 9     | 11    | 13    |
+#### Méthode de  la sécante
+| Fonction | k = 1 | k = 2 | k = 3 | k = 4 | k = 5 | k = 6 |
+|:--------:|------:|------:|------:|------:|------:|------:|
+| f1       | 2     | 2     | 3     | 3     | 4     | 4     |
+| f2       | 1     | 1     | 1     | 1     | 1     | 1     |
+| f3       | 5     | 7     | 10    | 13    | 15    | 18    |
+| f4       | 1     | 1     | 4     | 7     | 10    | 13    |
 
-
+### Illustration graphique
+<img width="535" height="282" alt="Figure 2026-11-02 200822 (1)" src="https://github.com/user-attachments/assets/fdbd3dad-46be-4a42-8e26-6559b96035fe" />
+<img width="445" height="282" alt="Figure 2026-11-02 200822 (2)" src="https://github.com/user-attachments/assets/2fb3431b-166c-4877-9b53-a33870e7a9a4" />
+<img width="452" height="285" alt="Figure 2026-11-02 200822 (3)" src="https://github.com/user-attachments/assets/71f81fe7-769f-4648-9783-3867d3fc1e19" />
+<img width="452" height="285" alt="Figure 2026-11-02 200822 (4)" src="https://github.com/user-attachments/assets/b660ffd5-bb4e-4ab4-a947-b7ad79955e25" />
