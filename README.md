@@ -75,6 +75,6 @@ J'ai exécuté les fonctions dichoto(), newton() ou secante() avec chacune des q
 
 ### Illustration graphique
 <p align = "center"> <img width="535" height="282" alt="Figure 2026-11-02 200822 (1)" src="https://github.com/user-attachments/assets/fdbd3dad-46be-4a42-8e26-6559b96035fe" />
-<img width="445" height="282" alt="Figure 2026-11-02 200822 (2)" src="https://github.com/user-attachments/assets/2fb3431b-166c-4877-9b53-a33870e7a9a4" />
-<img width="452" height="285" alt="Figure 2026-11-02 200822 (3)" src="https://github.com/user-attachments/assets/71f81fe7-769f-4648-9783-3867d3fc1e19" />
+<img width="445" height="282" alt="Figure 2026-11-02 200822 (2)" src="https://github.com/user-attachments/assets/2fb3431b-166c-4877-9b53-a33870e7a9a4" /> </p> 
+<p align = "center"><img width="452" height="285" alt="Figure 2026-11-02 200822 (3)" src="https://github.com/user-attachments/assets/71f81fe7-769f-4648-9783-3867d3fc1e19" />
 <img width="452" height="285" alt="Figure 2026-11-02 200822 (4)" src="https://github.com/user-attachments/assets/b660ffd5-bb4e-4ab4-a947-b7ad79955e25" /> </p> 
