@@ -3,22 +3,23 @@
 ## Table des matières
 
 1. [Objectif](#objectif)
-2. [Environnement et bibliothèques](#environnement-et-bibliothèques)
-3. [Hypothèses utilisées](#hypothèses-utilisées)
+2. [Environnement de développement](#environnement-de-développement)
+3. [Bibliothèques utilisées](#bibliothèques-utilisées)
+4. [Hypothèses utilisées](#hypothèses-utilisées)
    - [Méthode de dichotomie](#méthode-de-dichotomie)
    - [Méthode de Newton](#méthode-de-newton)
    - [Méthode de la sécante](#méthode-de-la-sécante)
-4. [Fonctions utilisées](#fonctions-utilisées)
-5. [Méthodes numériques](#méthodes-numériques)
+5. [Fonctions utilisées](#fonctions-utilisées)
+6. [Méthodes numériques](#méthodes-numériques)
    - [Dichotomie](#méthode-de-dichotomie-1)
    - [Newton](#méthode-de-newton-1)
    - [Sécante](#méthode-de-la-sécante-1)
-6. [Principe de comparaison](#principe-de-comparaison)
+7. [Principe de comparaison](#principe-de-comparaison)
    - [Données](#données)
    - [Paramètres expérimentaux](#paramètres-expérimentaux)
-7. [Analyse et interprétation](#analyse-et-interprétation)
-8. [Analyse comparative des trois méthodes](#analyse-comparative-des-trois-méthodes)
-9. [Conclusion](#conclusion)
+8. [Analyse et interprétation](#analyse-et-interprétation)
+9. [Analyse comparative des trois méthodes](#analyse-comparative-des-trois-méthodes)
+10. [Conclusion](#conclusion)
 
 ## Objectif 
 L'objectif de ce projet est de représenter graphiquement le nombre d'itérations nécessaires à chacune des trois méthodes numériques (dichotomie, sécante et Newton) pour approximer une racine d'une fonction sur un intervalle donné, en fonction de la précision demandée. Cette étude permet de comparer expérimentalement la vitesse de convergence de ces trois méthodes.
