@@ -1,56 +1,91 @@
 # Comparaison méthodes numériques
 
+## Table des matières
+
+1. [Objectif](#objectif)
+2. [Environnement et bibliothèques](#environnement-et-bibliothèques)
+3. [Hypothèses utilisées](#hypothèses-utilisées)
+   - [Méthode de dichotomie](#méthode-de-dichotomie)
+   - [Méthode de Newton](#méthode-de-newton)
+   - [Méthode de la sécante](#méthode-de-la-sécante)
+4. [Fonctions utilisées](#fonctions-utilisées)
+5. [Méthodes numériques](#méthodes-numériques)
+   - [Dichotomie](#méthode-de-dichotomie-1)
+   - [Newton](#méthode-de-newton-1)
+   - [Sécante](#méthode-de-la-sécante-1)
+6. [Principe de comparaison](#principe-de-comparaison)
+   - [Données](#données)
+   - [Paramètres expérimentaux](#paramètres-expérimentaux)
+7. [Analyse et interprétation](#analyse-et-interprétation)
+8. [Analyse comparative des trois méthodes](#analyse-comparative-des-trois-méthodes)
+9. [Conclusion](#conclusion)
+
 ## Objectif 
-Représenter graphiquement le nombre d'itérations nécessaire à chaque méthode numérique (Dichotomie, sécante et Newton) pour faire une approximation de la racine d'une fonction dans un intervalle précis en fonction d'une précision donné afin de comparer la vitesse de convergence des trois méthodes. 
+L'objectif de ce projet est de représenter graphiquement le nombre d'itérations nécessaires à chacune des trois méthodes numériques (dichotomie, sécante et Newton) pour approximer une racine d'une fonction sur un intervalle donné, en fonction de la précision demandée. Cette étude permet de comparer expérimentalement la vitesse de convergence de ces trois méthodes.
 
 ## Langage de programmation
 Python
-## Interface de programmation 
+## Environnement de développement 
 Spyder
 ## Bibliothèques utilisées 
 #### Matplotlib
-Pour illustrer graphiquement les fonctions 
-#### Numpy 
-Pour générer et manipuler les vecteurs et les fonctions mathématiques
+Pour illustrer graphiquement les fonctions.
+#### NumPy 
+Pour effectuer des calculs numériques et manipuler des tableaux et des fonctions mathématiques.
 
 ## Hypothèses utilisées
 Tout au long du projet, les fonctions utilisées respectent toutes les hypothèses citées ci-dessous. 
-Considérons f la fonction utilisée.
+Considérons une fonction f.
 ### Méthode de dichotomie
-f est continue sur un intervalle [a,b] de R et **f(a) * f(b) < 0** donc par le théorème des valeurs intermédiaires, il existe au moins un x* dans [a,b] tel que f(x*) = 0
-### Méthode de newton
-f est dérivable sur un intervalle [a,b] de R, on suppose qu'il existe un x* dans [a,b] tel que f(x*) = 0 et la dérivée ne s'annule pas au voisinage de la racine x*, c'est-à-dire que f est monotone sur au voisinage de sa racine.
+f est continue sur un intervalle [a,b] de R tel que **f(a) * f(b) < 0** donc d'après le théorème des valeurs intermédiaires, il existe au moins un x* dans [a,b] tel que f(x*) = 0
+### Méthode de Newton
+f est dérivable sur un intervalle [a,b] de R, on suppose qu'il existe un x* dans [a,b] tel que f(x*) = 0 et la dérivée ne s'annule pas au voisinage de la racine x*. La méthode de Newton est définie par **x(k+1) = x(k) - f(x(k)) / df(x(k))**, par conséquent df(x(k)) doit être non nul à chaque itération et x(0) suffisamment proche de x*.
 ### Méthode de la sécante
-c'est une variante de la méthode de newton ne nécessitant pas la connaissance de la dérivée. Donc f est continue sur [a,b] et **(f(b) - f(a))** différent de zéro.
+C'est une variante de la méthode de Newton ne nécessitant pas le calcul de la dérivée. Donc f est continue sur [a,b]. Elle est définie par **x(k + 1) = x(k) - f(x(k)) * ((x(k) - x(k-1)) / (f(x(k))-f(x(k-1))))** et donc f(x(k))-f(x(k - 1)) doit être non nul à chaque itération avec x(0) = a et x(1) = b.
 
 ## Fonctions utilisées 
-Pour ce projet, j'ai utilisé 04 fonctions donc certaines ont été proposées dans l'exercice de groupe. Parmi ces fonctions, nous avons f1(x) = 3cos(x) - 2log(x+1) -1 avec x > -1; f2(x) = 9x - 3/2; f3(x) = (5x - 2)^3; f4(x) = (2x - 1)^5  pour tout x dans R, et toutes ces fonctions vérifient toutes les hypothèses énumérées ci-dessus avec pour dérivées respectives df1(x) = -3sin(x) - 2/(1+x); df2(x) = 9; df3(x) = 15(5x-2)^2; df4(x) = 10(2x-1)^4
+Pour ce projet, j'ai utilisé quatre fonctions, dont certaines ont été proposées dans le cadre d'un travail de groupe. 
+| Fonction | Expression | Dérivées | domaine de definition | 
+|:--------:|:-----------:|:---------:|:----------------------:|
+| f1       | 3cos(x) - 2log(x+1) -1| -3sin(x) - 2/(1+x) | ]-1,+inf[     |
+| f2       | 9x - 3/2| 9     | R  | 
+| f3       | (5x - 2)^3 | 15(5x-2)^2 | R   | 
+| f4       | (2x - 1)^5 | 10(2x-1)^4 | R   | 
 ### Illustration graphique
 <img width="1710" height="880" alt="Figure 2026-10-31 230925 (0)" src="https://github.com/user-attachments/assets/bc250c73-d62c-47a3-ac83-f6b0307a66e9" />
 
 ## Méthodes numériques
 ### Méthode de dichotomie
 #### Principe
-soit f une fonction vérifiant les hypothèses ci-dessus. la méthode de dichotomie consiste à diviser l'intervalle [a,b] en deux sous-intervalles de longueur égale et on sélectionne parmi eux celui où se trouve de manière certaine une racine de f, puis on répète de manière itérative cet opération jusqu'à obtenir un intervalle jugé suffisamment petit.  
+Soit f une fonction vérifiant les hypothèses ci-dessus. La méthode de dichotomie consiste à diviser l'intervalle [a,b] en deux sous-intervalles de longueur égale et on sélectionne celui des deux sous-intervalles où se trouve de manière certaine une racine de f, puis on répète cette opération jusqu'à obtenir un intervalle jugé suffisamment petit.  
 #### Dichoto(f, a:float, b:float, k:int, nbetap = 10000)
-la fonction dichoto() prend en argument une fonction f vérifiant les hypothèses ci-dessus, deux réels a, b, un entier k pour la précision et un nombre d'itérations maximales ici fixé à 10000. Elle renvoie une erreur si les conditions **a < b ou f(a) * f(b) < 0** ne sont pas vérifiées ou si la méthode ne converge pas après 10000 itérations et dans le cas contraire, renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaire pour atteindre cette précision (10^(-k)).
+La fonction dichoto() prend en arguments une fonction f vérifiant les hypothèses ci-dessus, deux réels a, b, un entier k pour la précision et un nombre maximal d'itérations ici fixé à 10000. Elle renvoie une erreur si les conditions **a < b ou f(a) * f(b) < 0** ne sont pas vérifiées ou si la méthode ne converge pas après 10000 itérations et dans le cas contraire, renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaires pour atteindre cette précision (10^(-k)).
 
 ### Méthode de newton
 #### Principe
-soit f une fonction vérifiant les hypothèses ci-dessus. Partant d’un point initial x(0) connu dans un voisinage suffisamment petit de la racine x* de la fonction f, on construit itérativement une suite de points x(k) qui convergera vers le point x* recherché. On approche à chaque itération k la courbe de la fonction par sa tangente en x(k). Le point x(k+1) est alors l’intersection de la tangente au point x(k) avec l’axe des abscisses. on a donc **x(k+1) = x(k) - f(x(k)) / df(x(k))** pour tout k >= 0 et c'est bien définie sur [a,b]  car df ne s'annule pas par hypothèse. 
+soit f une fonction vérifiant les hypothèses ci-dessus. Partant d’un point initial x(0) connu dans un voisinage suffisamment petit de la racine x* de la fonction f, on construit itérativement une suite de points x(k) qui convergera vers le point x* recherché. On approche à chaque itération k la courbe de la fonction par sa tangente en x(k). Le point x(k+1) est alors l’intersection de la tangente au point x(k) avec l’axe des abscisses. on a donc **x(k+1) = x(k) - f(x(k)) / df(x(k))** pour tout k >= 0 et elle est bien définie sur [a,b]  car df ne s'annule pas par hypothèse. 
 #### Newton(f, df, b:float, k:int, nbetap = 10000)
-Elle prend en argument une fonction f vérifiant les hypothèses ci-dessus avec sa dérivée df, un réel b qui représente x(0), un entier k pour la précision et le nombre d'itérations maximales fixé à 10000. Elle renvoie une erreur si pour tout x, df(x) = 0 ou si la méthode ne converge pas après 10000 et dans le cas contraire renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaire pour atteindre cette précision (10^(-k)).
+Elle prend en arguments une fonction f vérifiant les hypothèses ci-dessus avec sa dérivée df, un réel b qui représente x(0), un entier k pour la précision et le nombre maximal d'itérations fixé à 10000. Elle renvoie une erreur si pour tout x, df(x) = 0 ou si la méthode n'a pas satisfait le critère d'arrêt  après 10000 itérations et dans le cas contraire renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaires pour atteindre cette précision (10^(-k)).
 
 ### Méthode de la sécante
 #### Principe 
 soit f une fonction vérifiant les hypothèses ci-dessus. La méthode de la sécante est une variante géométrique de la méthode de newton et ne nécessite pas de calcul de la dérivée. Elle utilise les deux derniers points calculés pour déterminer le point suivant. À l’itération k, la droite sécante passe par les points **M(k−1) = (x(k−1),f(x(k−1))) et M(k) = (x(k),f(x(k)))**. Le nouveau point x(k+1) est l’intersection de cette droite avec l’axe des abscisses. on a donc **x(k + 1) = x(k) - f(x(k)) * ((x(k) - x(k-1)) / (f(x(k))-f(x(k-1))))** pour tout k >= 1 et x(0) et x(1) connus. 
 #### Secante(f, a:float, b:float, k:int, nbetap = 10000)
-Elle prend en argument une fonction f vérifiant les hypothèses ci-dessus, deux réels a, b tels que a = x(0) et b = x(1), un entier k pour la précision et un nombre d'itérations maximales fixé à 10000. Elle renvoie une erreur si **f(a) - f(b) = 0** ou si la méthode ne converge pas après 10000 itérations. Sinon elle renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de la fonction f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaire pour atteindre cette précision (10^(-k)).
+Elle prend en arguments une fonction f vérifiant les hypothèses ci-dessus, deux réels a, b tels que a = x(0) et b = x(1), un entier k pour la précision et un nombre maximal d'itérations fixé à 10000. Elle renvoie une erreur si **f(a) - f(b) = 0** ou si la méthode n'a pas satisfait le critère d'arrêt après 10000 itérations. Sinon elle renvoie un couple constitué d'un réel x* qui est l'approximation d'une racine de f tel que **|f(x *)| < 10^(-k)**; et d'un entier i représentant le nombre d'itérations nécessaires pour atteindre cette précision (10^(-k)).
 
 ## Principe de comparaison 
-Toutes les fonctions dichoto(), newton() ou secante(), ont comme argument une précision k et retournent une approximation de la racine de la fonction tel que **|f(x * )| < 10^(-k)** et le nombre d'itérations nécessaires pour atteindre cet précision. Ici, pour chacune des quatre fonctions f1, f2, f3 et f4 citées ci-dessus, nous allons tracer des graphes représentant le nombre d'itérations nécessaire pour atteindre la précision de 10^(-k) en fonction de k avec k = {1,2,3,4,5,6}
+Toutes les fonctions dichoto(), newton() ou secante(), ont comme argument une précision k et retournent une approximation de la racine de la fonction tel que **|f(x * )| < 10^(-k)** et le nombre d'itérations nécessaires pour atteindre cet précision. Ici, pour chacune des quatre fonctions f1, f2, f3 et f4 citées ci-dessus, nous allons tracer des graphes représentant le nombre d'itérations nécessaire pour atteindre la précision de 10^(-k) en fonction de k avec k = {1,2,3,4,5,6}.
 ### Données 
-J'ai exécuté les fonctions dichoto(), newton() ou secante() avec chacune des quatre fonctions f1, f2, f3 et f4 citées ci-dessus et avec la précision k allant de 1 à 6. j'ai récupéré le nombre d'itérations pour chaque méthode et avant de présenter le graphe je vais présenter ces données numériques sous formes de tableau
+J'ai exécuté les fonctions dichoto(), newton() ou secante() avec chacune des quatre fonctions f1, f2, f3 et f4 citées ci-dessus et avec la précision k allant de 1 à 6. j'ai rélevé le nombre d'itérations pour chaque méthode et avant de présenter les graphiques je présente ces données numériques sous forme de tableau.
+### Paramètres expérimentaux
+Afin de comparer les trois méthodes dans des conditions identiques, les paramètres suivants ont été utilisés :
+- Intervalle initial pour la dichotomie : [0.1, 1].
+- Point initial de Newton : x(0) = 1.
+- Points initiaux de la sécante : x(0) = 0.1 et x(1) = 1.
+- Précisions étudiées : 10^(-k), avec k allant de 1 à 6.
+- Nombre maximal d'itérations : 10 000.
+Le critère d'arrêt utilisé pour les trois méthodes est :
+|f(x(n))| < 10^(-k). Il s'agit d'un critère portant sur le résidu de la fonction et non directement sur l'erreur absolue entre l'approximation obtenue et la racine exacte.
 #### Méthode de dichotomie 
 | Fonction | k = 1 | k = 2 | k = 3 | k = 4 | k = 5 | k = 6 |                 
 |:--------:|------:|------:|------:|------:|------:|------:|
@@ -97,7 +132,7 @@ La dichotomie présente une convergence régulière : plus la précision demand�
 - Pour f3, le nombre d'itérations augmente de 5 à 15.
 - Pour f4, il passe de 3 à 13.
 #### Interprétation :
-Les résultats montrent que la méthode de Newton peut être particulièrement rapide pour certaines fonctions, notamment f1 et f2. Cependant, son comportement dépend fortement de la nature de la racine. En particulier, f3 et f4 possèdent des racines multiples (respectivement d'ordre 3 et 5). Dans ce cas, la convergence quadratique habituelle de Newton n'est plus obtenue : la convergence devient généralement linéaire. Cela explique pourquoi le nombre d'itérations augmente davantage pour ces deux fonctions lorsque la précision demandée devient plus élevée. La méthode nécessite également le calcul de la dérivée et un choix judicieux du point initial.
+Les résultats montrent que la méthode de Newton peut être particulièrement rapide pour certaines fonctions, notamment f1 et f2. Cependant, son comportement dépend fortement de la nature de la racine (simple ou multiple). En particulier, f3 et f4 possèdent des racines multiples (respectivement d'ordre 3 et 5). Dans ce cas, la convergence quadratique habituelle de Newton n'est plus obtenue : la convergence devient généralement linéaire. Cela explique pourquoi le nombre d'itérations augmente davantage pour ces deux fonctions lorsque la précision demandée devient plus élevée. La méthode nécessite également le calcul de la dérivée et un choix judicieux du point initial.
 
 ### Méthode de la sécante
 #### Observation
@@ -109,7 +144,7 @@ Les résultats montrent que la méthode de Newton peut être particulièrement r
 La méthode de la sécante présente de bonnes performances pour certaines fonctions, notamment f1 et f2. Pour f3 et f4, on observe une augmentation plus importante du nombre d'itérations. Cela peut notamment s'expliquer par la présence de racines multiples, qui dégrade le comportement de convergence habituel de cette méthode. La méthode de la sécante présente l'avantage de ne pas nécessiter le calcul de la dérivée. Cependant, elle nécessite deux approximations initiales et peut être sensible à leur choix.
 
 ## Analyse comparative des trois méthodes 
-Pour cette partie j'ai décidé de représenter cela sous forme de tableau.
+Pour cette partie j'ai choisi de présenter les résultats sous forme de tableau.
 | Critères | Dichotomie | Newton | Sécante |
 |:---|:---:|:---:|:---:|
 | Utilise la dérivée | Non | Oui | Non |
@@ -118,15 +153,8 @@ Pour cette partie j'ai décidé de représenter cela sous forme de tableau.
 | Robustesse | Élevée sous conditions | Dépend du point initial | Dépend des points initiaux |
 | Coût par itération | Faible | Calcul de la dérivée | Calcul de deux fonctions |
 #### Interprétation générale
-Les résultats numériques mettent en évidence des différences de comportement entre les trois méthodes. 
-
-La méthode de dichotomie présente une convergence linéaire et relativement régulière. Elle constitue une méthode fiable lorsque les conditions d'encadrement sont satisfaites. 
-
-La méthode de Newton peut atteindre rapidement la précision souhaitée, notamment lorsque la racine est simple et que le point initial est suffisamment proche de celle-ci. Elle présente généralement une convergence quadratique dans ces conditions.
-
-La méthode de la sécante constitue une alternative intéressante à Newton puisqu'elle ne nécessite pas le calcul de la dérivée. Pour une racine simple, elle possède généralement une convergence superlinéaire, mais reste sensible au choix des approximations initiales.
-
-Enfin, les fonctions f3 et f4 mettent en évidence l'influence de la multiplicité des racines sur la convergence des méthodes numériques.
-
+Les résultats obtenus mettent en évidence que la vitesse de convergence des méthodes numériques dépend à la fois de la méthode utilisée et des propriétés de la fonction étudiée.
+La méthode de dichotomie présente une convergence linéaire et une bonne robustesse lorsque les conditions d'encadrement sont satisfaites. Son principal inconvénient réside dans le nombre relativement important d'itérations nécessaires pour atteindre une précision élevée. La méthode de Newton présente généralement une convergence quadratique au voisinage d'une racine simple. Elle peut donc atteindre rapidement la précision recherchée, à condition de disposer d'un point initial suffisamment proche de la racine.
+La méthode de la sécante constitue une alternative intéressante à Newton. Elle ne nécessite pas le calcul de la dérivée et possède généralement une convergence superlinéaire pour une racine simple. L'étude des fonctions f3 et f4 montre cependant que la multiplicité des racines influence le comportement des méthodes. En effet, les racines de ces deux fonctions sont respectivement de multiplicité 3 et 5. La convergence quadratique habituelle de Newton n'est alors plus obtenue et devient généralement linéaire. Enfin, les résultats obtenus dépendent également du choix des approximations initiales et du critère d'arrêt. La comparaison réalisée doit donc être interprétée dans le cadre précis des paramètres expérimentaux retenus.
 ## Conclusion
 Ce travail a permis d'étudier et de comparer trois méthodes numériques de recherche des zéros d'une fonction : la dichotomie, la méthode de Newton et la méthode de la sécante. L'étude des résultats numériques et des représentations graphiques montre que les performances de ces méthodes dépendent à la fois de la fonction étudiée, de la précision recherchée et des conditions initiales. La dichotomie se distingue par sa robustesse et la régularité de sa convergence, mais nécessite généralement davantage d'itérations. La méthode de Newton peut être particulièrement rapide grâce à sa convergence quadratique dans le cas d'une racine simple, mais son efficacité dépend du choix du point initial et de la dérivée de la fonction. La méthode de la sécante constitue un compromis intéressant puisqu'elle ne nécessite pas le calcul de la dérivée, tout en présentant une convergence généralement plus rapide que celle de la dichotomie pour une racine simple. L'étude des fonctions possédant des racines multiples a également permis de mettre en évidence une dégradation de la vitesse de convergence, notamment pour les méthodes de Newton et de la sécante. Ainsi, aucune méthode ne présente un avantage absolu dans toutes les situations. Le choix d'une méthode numérique doit dépendre des propriétés de la fonction étudiée, de la précision souhaitée et des informations disponibles.
